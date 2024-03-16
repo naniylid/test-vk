@@ -17,10 +17,9 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { currentPage, searchValue } = useSelector(selectFilterSlice);
+  const { currentPage } = useSelector(selectFilterSlice);
   const { items, status } = useSelector(selectProductSlice);
 
   const onChangePage = (value: number) => {
@@ -28,13 +27,10 @@ export const Home: React.FC = () => {
   };
 
   const getProducts = async () => {
-    // const search = searchValue;
-    const title = searchValue;
     dispatch(
       //Бизнес логика получения данных
       fetchProducts({
         currentPage: String(currentPage),
-        title,
       }),
     );
     window.scrollTo(0, 0);
@@ -48,11 +44,9 @@ export const Home: React.FC = () => {
 
       dispatch(
         setFilters({
-          searchValue: params.title,
           currentPage: Number(params.currentPage),
         }),
       );
-      isSearch.current = true;
     }
   }, []);
 
@@ -65,16 +59,14 @@ export const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [searchValue, currentPage]);
+  }, [currentPage]);
 
   // //Если был первый рендер, то запрашиваем данные
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    if (!isSearch.current) {
-      getProducts();
-    }
-    isSearch.current = false;
-  }, [searchValue, currentPage]);
+
+    getProducts();
+  }, [currentPage]);
 
   const products = items.map((obj: any) => <ProductBlock {...obj} key={obj.id} />);
 

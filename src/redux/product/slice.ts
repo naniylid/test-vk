@@ -6,13 +6,12 @@ import { identity, pickBy } from 'lodash';
 export const fetchProducts = createAsyncThunk<Product[], SearchProductParams>(
   'product/fetchProductsStatus',
   async (params) => {
-    const { title, currentPage } = params;
+    const { currentPage } = params;
     const { data } = await axios.get<Product[]>(`https://fakestoreapi.com/products/`, {
       params: pickBy(
         {
           page: currentPage,
           limit: 8,
-          title,
         },
         identity,
       ),

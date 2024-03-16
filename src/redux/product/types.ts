@@ -12,7 +12,6 @@ export enum Status {
 }
 
 export type SearchProductParams = {
-  title: string;
   currentPage: string;
 };
 

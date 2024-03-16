@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Search from './Search';
 
 import { selectCart } from '../redux/cart/selectors';
 
@@ -31,7 +30,7 @@ const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-        {location.pathname !== './cart' && <Search />}
+        {location.pathname !== './cart'}
         <div className='header__cart'>
           {location.pathname !== './cart' && (
             <Link to='/cart' className='button button--cart'>

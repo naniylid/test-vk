@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FilterSliceState } from './types';
 
 const initialState: FilterSliceState = {
-  searchValue: '',
   currentPage: 1,
 };
 
@@ -10,9 +9,6 @@ const filterSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setSearchValue(state, action: PayloadAction<string>) {
-      state.searchValue = action.payload;
-    },
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
@@ -26,6 +22,6 @@ const filterSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, setFilters, setSearchValue } = filterSlice.actions;
+export const { setCurrentPage, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;
